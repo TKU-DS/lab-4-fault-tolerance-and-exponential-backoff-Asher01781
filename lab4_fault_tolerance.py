@@ -60,23 +60,23 @@ def upload_with_backoff(payload):
         
         if attempt < MAX_RETRIES:
             # TODO 1: Calculate Exponential Backoff
-            # Hint: backoff = BASE_DELAY * (2 ** (attempt - 1))
-            
+            backoff = BASE_DELAY * (2 ** (attempt - 1))
             
             # TODO 2: Add Jitter (Randomness)
             # Hint: Use random.uniform(0, 0.5) to generate jitter
-            
+            jitter = random.uniform(0, 0.5)
             
             # TODO 3: Calculate total sleep time and pause the execution
-            # Hint: sleep_time = backoff + jitter
-            
-            pass # Remove this pass when implementing
+            sleep_time = backoff + jitter
+            print(f"pause the execution: {sleep_time:.2f} seconds")
+            time.sleep(sleep_time)
             
     # If we exhaust all retries, do not crash!
     print("    -> [Fatal] Max retries reached. Triggering DLQ fallback.")
     
     # TODO 4: Call the DLQ function to save the payload locally
-    
+    save_to_dlq(payload)
+
     return False
 
 if __name__ == "__main__":
