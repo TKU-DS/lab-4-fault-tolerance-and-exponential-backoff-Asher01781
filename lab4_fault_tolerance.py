@@ -67,9 +67,9 @@ def upload_with_backoff(payload):
             jitter = random.uniform(0, 0.5)
             
             # TODO 3: Calculate total sleep time and pause the execution
-            sleep_time = backoff + jitter
-            print(f"pause the execution: {sleep_time:.2f} seconds")
-            time.sleep(sleep_time)
+            sleepTime = backoff + jitter
+            print(f"pause the execution: {sleepTime:.2f} seconds")
+            time.sleep(sleepTime)
             
     # If we exhaust all retries, do not crash!
     print("    -> [Fatal] Max retries reached. Triggering DLQ fallback.")
